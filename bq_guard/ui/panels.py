@@ -22,6 +22,22 @@ class EstimateState:
 class EstimatePanel(Widget):
     def __init__(self) -> None:
         super().__init__()
+        self._log = RichLog(markup=True)
+
+    def compose(self):
+        yield self._log
+
+    def update_state(self, state: EstimateState) -> None:
+        self._log.clear()
+        self._log.write(f"[b]Project:[/b] {state.project}")
+        self._log.write(f"[b]Location:[/b] {state.location}")
+        bytes_value = "-" if state.bytes_processed is None else f"{state.bytes_processed:,}"
+        self._log.write(f"[b]Estimated bytes:[/b] {bytes_value}")
+        if state.last_updated:
+            self._log.write(f"[b]Updated:[/b] {state.last_updated}")
+        self._log.write("\n[b]Findings:[/b]")
+        if not state.findings:
+            self._log.write("- none")
         self.log = RichLog(markup=True)
 
     def compose(self):
@@ -42,6 +58,15 @@ class EstimatePanel(Widget):
             color = "red" if finding.severity == Severity.ERROR else "yellow"
             evidence = f" ({finding.evidence})" if finding.evidence else ""
             table = f" [{finding.table}]" if finding.table else ""
+            self._log.write(
+                f"[{color}]{finding.severity} {finding.code}[/]: {finding.message}{evidence}{table}"
+            )
+        self._log.write("\n[b]Partition check:[/b]")
+        if not state.partition_summary:
+            self._log.write("- none")
+        else:
+            for line in state.partition_summary:
+                self._log.write(f"- {line}")
             self.log.write(
                 f"[{color}]{finding.severity} {finding.code}[/]: {finding.message}{evidence}{table}"
             )
