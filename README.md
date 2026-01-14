@@ -54,6 +54,6 @@ gcloud auth application-default login
 - Ctrl+E: dry-run 見積もり
 - Ctrl+Enter: Review/Approve フロー開始 (実行は承認後のみ)
 - Ctrl+S: CSV エクスポート
-- Ctrl+,: 設定編集
+- Ctrl+, (comma): 設定編集
 - Ctrl+M: テーブルメタ再取得
 - Ctrl+Q: 終了
