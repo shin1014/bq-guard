@@ -72,7 +72,7 @@ class BqGuardApp(App):
         ("ctrl+e", "estimate", "Estimate"),
         ("ctrl+enter", "review", "Review"),
         ("ctrl+s", "export", "Export"),
-        ("ctrl+,", "settings", "Settings"),
+        ("ctrl+comma", "settings", "Settings"),
         ("ctrl+m", "refresh_meta", "Refresh metadata"),
         ("ctrl+q", "quit", "Quit"),
     ]
