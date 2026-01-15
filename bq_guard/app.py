@@ -2,10 +2,17 @@ from __future__ import annotations
 
 import asyncio
 import re
+import warnings
 from dataclasses import dataclass
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Dict, List, Optional, Tuple
+
+warnings.filterwarnings(
+    "ignore",
+    category=FutureWarning,
+    module=r"google\.api_core\._python_version_support",
+)
 
 from google.cloud import bigquery
 from textual.app import App, ComposeResult
